@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { listAlbums } from './graphql/queries';
+import { listAlbums } from '../graphql/queries';
 import {
   createAlbum as createAlbumMutation,
   deleteAlbum as deleteAlbumMutation,
-} from './graphql/mutations';
+} from '../graphql/mutations';
+import { Container } from 'react-bootstrap';
+import ThemeContext from '../contexts/ThemeContext';
 
 const initialFormState = { name: '' };
 
-function App() {
+function Main() {
   const [albums, setAlbums] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     fetchAlbums();
@@ -64,27 +67,29 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Picover</h1>
-      <input
-        onChange={(e) => setFormData({ name: e.target.value })}
-        placeholder="Album name"
-        value={formData.name}
-      />
-      <input type="file" onChange={onChange} />
-      <button onClick={createAlbum}>Create Album</button>
-      <div style={{ marginBottom: 30 }}></div>
-      {albums.map((album) => (
-        <div key={album.id || album.name}>
-          <h2>{album.name}</h2>
-          <button onClick={() => deleteAlbum(album)}>Delete album</button>
-          {album.image && <img src={album.image} style={{ width: 400 }} />}
-        </div>
-      ))}
+    <Container className={theme}>
+      <div className="App">
+        <h1>Picover</h1>
+        <input
+          onChange={(e) => setFormData({ name: e.target.value })}
+          placeholder="Album name"
+          value={formData.name}
+        />
+        <input type="file" onChange={onChange} />
+        <button onClick={createAlbum}>Create Album</button>
+        <div style={{ marginBottom: 30 }}></div>
+        {albums.map((album) => (
+          <div key={album.id || album.name}>
+            <h2>{album.name}</h2>
+            <button onClick={() => deleteAlbum(album)}>Delete album</button>
+            {album.image && <img src={album.image} style={{ width: 400 }} />}
+          </div>
+        ))}
 
-      <AmplifySignOut />
-    </div>
+        <AmplifySignOut />
+      </div>
+    </Container>
   );
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(Main);
