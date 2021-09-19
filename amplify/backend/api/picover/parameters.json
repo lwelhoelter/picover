@@ -1,0 +1,5 @@
+{
+  "AppSyncApiName": "picover",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false
+}

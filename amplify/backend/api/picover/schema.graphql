@@ -1,0 +1,13 @@
+type Album @model {
+  id: ID!
+  name: String!
+  image: String
+}
+
+type Photo @model @key(name: "byAlbum", fields: ["albumID"]) {
+  id: ID!
+  title: String!
+  albumID: ID!
+  album: Album @connection(fields: ["albumID"])
+}
+
