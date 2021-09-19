@@ -3,15 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^1.2.16",
+    "aws-amplify": "^4.2.10",
     "axios": "^0.21.4",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.3",
     "pg": "^8.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "sequelize": "^6.6.5",
     "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.2",
+    "nodemon": "^2.0.12"
   },
   "scripts": {
     "start": "react-scripts start & npm run start-server",
@@ -37,9 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "chalk": "^4.1.2",
-    "nodemon": "^2.0.12"
   }
 }
